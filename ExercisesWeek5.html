@@ -1,67 +1,4 @@
 <html>
-
-<head>
-<style type="text/css">
-.inline {
-  background-color: #f7f7f7;
-  border:solid 1px #B0B0B0;
-}
-.error {
-	font-weight: bold;
-	color: #FF0000;
-}
-.warning {
-	font-weight: bold;
-}
-.message {
-	font-style: italic;
-}
-.source, .output, .warning, .error, .message {
-	padding: 0 1em;
-  border:solid 1px #F7F7F7;
-}
-.source {
-  background-color: #f5f5f5;
-}
-.left {
-  text-align: left;
-}
-.right {
-  text-align: right;
-}
-.center {
-  text-align: center;
-}
-.hl.num {
-  color: #AF0F91;
-}
-.hl.str {
-  color: #317ECC;
-}
-.hl.com {
-  color: #AD95AF;
-  font-style: italic;
-}
-.hl.opt {
-  color: #000000;
-}
-.hl.std {
-  color: #585858;
-}
-.hl.kwa {
-  color: #295F94;
-  font-weight: bold;
-}
-.hl.kwb {
-  color: #B05A65;
-}
-.hl.kwc {
-  color: #55aa55;
-}
-.hl.kwd {
-  color: #BC5A65;
-  font-weight: bold;
-}
 </style>
 <title>HTML-Exercise5</title>
 </head>
@@ -121,17 +58,17 @@ Lets plot all the countries <span class="hl kwa">in</span> 1952.
 #Q2. What country is the richest <span class="hl kwa">in</span> <span class="hl kwd">1952</span> (far right on x axis)? 
 <span class="hl com">#A2: So I want to have the top countries on the variable GDP pr. capita see, which country lies the highest.</span>
 <span class="hl com">#To do so, I group the data with country and GDP pr. capita </span>
-<span class="hl com">#And the result: It turns out, Kuwait is the richest country <span class="hl kwa">in</span> 1952. </span>
-<span class="hl com">#Note: GDP pr. capita is a flawed variable to use to measure a country's wealth, but none the less it is the most useful <span class="hl kwa">in</span> this dataset.</span>
+<span class="hl com">#And the result: It turns out, Kuwait is the richest country in 1952. </span>
+<span class="hl com">#Note: GDP pr. capita is a flawed variable to use to measure a country's wealth, but none the less it is the most useful in this dataset.</span>
 
-<span class="hl kwd">ubset</span>(gapminder,year==1952)%&gt;% 
-  <span class="hl kwd">group_by</span>(country,gdpPercap) %&gt;% 
-  <span class="hl kwd">summarize</span>(min_gdpPercap=<span class="hl kwd">min</span>(gdpPercap),
-            max_gdpPercap=<span class="hl kwd">max</span>(gdpPercap)) %&gt;%
-  <span class="hl kwd">arrange</span>(<span class="hl kwd">desc</span>(max_gdpPercap)) #stigende med desc
+<span subset(gapminder,year==1952)%&gt;% 
+  <span group_by</span>(country,gdpPercap) %&gt;% 
+  <span summarize(min_gdpPercap=min(gdpPercap),
+            max_gdpPercap=max(gdpPercap)) %&gt;%
+  <span arrange</span>(<span class="hl kwd">desc</span>(max_gdpPercap)) #stigende med desc
 
 
-<span class="hl com">#You can generate a similar plot <span class="hl kwa">for</span> 2007 and compare the differences</span>
+<span class="hl com">#You can generate a similar plot for2007 and compare the differences</span>
 
 <span class="hl kwd">ggplot</span>(<span class="hl kwd">subset</span>(gapminder, year == 2007), <span class="hl kwd">aes</span>(gdpPercap, lifeExp, size = pop)) +
   <span class="hl kwd">geom_point</span>() +
