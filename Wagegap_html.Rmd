@@ -1,0 +1,93 @@
+---
+title: "Wagegap_exam"
+author: "Stine Slotved Kristensen"
+date: "1/5/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+---
+title: "Wagegap_exam_html"
+author: "Stine Slotved Kristensen"
+date: "1/5/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r wagegap}
+
+wagegap_management <- read.csv2("~/Desktop/wagegap_management.csv")
+View(wagegap_management)
+wagegap_caregiving <- read.csv2("~/Desktop/wagegap_caregiving.csv")
+View(wagegap_caregiving)
+wagegap_education <- read.csv2("~/Desktop/wagegap_education.csv")
+View(wagegap_education)
+wagegap_all <- read.csv2("~/Desktop/wagegap_all.csv")
+View(wagegap_all)
+
+install.packages("tidyverse")
+install.packages("gganimate")
+install.packages("gifski")
+install.packages("av")
+
+library(tidyverse)
+library(gganimate)
+library(gifski)
+library(av)
+
+wagegap_management
+wagegap_caregiving
+wagegap_education
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r wagegap_all, echo=FALSE}
+
+#Scatterplot with changing percantage for management positions in shifting years
+anim1 <- ggplot(wagegap_management, aes(Management_in_pct, Agegroup)) +
+  geom_point(alpha = 0.5, aes(color = Management_in_pct)) +
+  labs(subtitle = 'Year: {frame_time}', x = 'Difference in percent', y = 'Agegroup') +
+  transition_time(Year) +
+  labs(title = 'Management sector percentage change from 2010 to 2019 with different agegroups')+
+  theme_minimal()
+anim1
+
+#Scatterplot with changing percantage for caregiving jobs in shifting years
+anim2 <- ggplot(wagegap_caregiving, aes(Caregiving_in_pct, Agegroup)) +
+  geom_point(alpha = 0.5, aes(color = Caregiving_in_pct)) +
+  labs(subtitle = 'Year: {frame_time}', x = 'Difference in percent', y = 'Agegroup') +
+  transition_time(Year) +
+  labs(title = 'Caregiving sector percentage change from 2010 to 2019 with different agegroups')+
+  theme_minimal()
+anim2
+
+#Scatterplot with changing percantage for the education sector in shifting years
+anim3 <- ggplot(wagegap_education, aes(Education_in_pct, Agegroup)) +
+  geom_point(alpha = 0.5, aes(color = Education_in_pct)) +
+  labs(subtitle = 'Year: {frame_time}', x = 'Difference in percent', y = 'Agegroup') +
+  transition_time(Year) +
+  labs(title = 'Educational sector percentage change from 2010 to 2019 with different agegroups')+
+  theme_minimal()
+anim3
+
+#Scatterplot with changing avarage percantage in all sectors (management, education and caregiving)
+anim4 <- ggplot(wagegap_all, aes(WageGap, Sector)) +
+  geom_point(alpha = 1.5, aes(color = WageGap)) +
+  labs(subtitle = 'Year: {frame_time}', x = 'Difference in percent', y = 'Sector') +
+  transition_time(Year) +
+  labs(title = 'Comparison of the sectors percentage change from 2010 to 2019')+
+  theme_minimal()
+anim4
+
+
+```
